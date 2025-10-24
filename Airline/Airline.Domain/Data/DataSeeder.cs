@@ -9,7 +9,7 @@ namespace Airline.Domain.Data;
 /// <summary>
 /// Данные для тестирования 
 /// </summary>
-public class AirlineTestsFixture
+public class DataSeeder
 {
     /// <summary>
     /// Коллекция семейств самолетов
@@ -38,7 +38,54 @@ public class AirlineTestsFixture
 
     private int _ticketId = 1;
 
-    public AirlineTestsFixture()
+    public DataSeeder()
+    {
+        InitAircraftFamilies();
+        InitAircraftModels();
+        InitFlights();
+        InitPassengers();
+        InitTickets();
+    }
+
+    private void InitTickets()
+    {
+        var count = Math.Min(Passengers.Count, Flights.Count);
+        for (var i = 0; i < count; ++i)
+        {
+            var ticket = new Ticket
+            {
+                Id = _ticketId++,
+                Flight = Flights[i],
+                Passenger = Passengers[i],
+                SeatNumber = $"{1 + i}A",
+                HasHandLuggage = i % 2 != 0,
+                BaggageWeight = i * 2
+            };
+
+            Tickets.Add(ticket);
+            (Flights[i].Tickets ??= []).Add(ticket);
+            (Passengers[i].Tickets ??= []).Add(ticket);
+        }
+    }
+
+    private void InitPassengers()
+    {
+        Passengers.AddRange(
+            [
+                new Passenger { Id = 1, PassportNumber = "P210001", LastName = "Агафонов", FirstName = "Антон", Patronymic = "Алексеевич", BirthDate = new DateTime(2004, 4, 15) },
+                new Passenger { Id = 2, PassportNumber = "P210002", LastName = "Журавлев", FirstName = "Сергей", Patronymic = "Александрович", BirthDate = new DateTime(2004, 9, 7) },
+                new Passenger { Id = 3, PassportNumber = "P210003", LastName = "Козловская", FirstName = "Ксения", Patronymic = "Александровна", BirthDate = new DateTime(2004, 1, 22) },
+                new Passenger { Id = 4, PassportNumber = "P210004", LastName = "Ксеневич", FirstName = "Максим", Patronymic = "Станиславович", BirthDate = new DateTime(2004, 11, 10) },
+                new Passenger { Id = 5, PassportNumber = "P210005", LastName = "Лутфуллин", FirstName = "Глеб", Patronymic = "Айдарович", BirthDate = new DateTime(2004, 3, 28) },
+                new Passenger { Id = 6, PassportNumber = "P210006", LastName = "Марченко", FirstName = "Софья", Patronymic = "Александровна", BirthDate = new DateTime(2004, 7, 12) },
+                new Passenger { Id = 7, PassportNumber = "P210007", LastName = "Ретивов", FirstName = "Данила", Patronymic = "Олегович", BirthDate = new DateTime(2004, 10, 3) },
+                new Passenger { Id = 8, PassportNumber = "P210008", LastName = "Сайдашев", FirstName = "Андрей", Patronymic = "Алексеевич", BirthDate = new DateTime(2003, 6, 19) },
+                new Passenger { Id = 9, PassportNumber = "P210009", LastName = "Спиридонова", FirstName = "Ксения", Patronymic = "Сергеевна", BirthDate = new DateTime(2004, 9, 5) },
+                new Passenger { Id = 10, PassportNumber = "P210010", LastName = "Яковлев", FirstName = "Радик", Patronymic = "Сергеевич", BirthDate = new DateTime(2005, 12, 30) }
+            ]
+        );
+    }
+    private void InitAircraftFamilies()
     {
         Families.AddRange(
             [
@@ -54,7 +101,10 @@ public class AirlineTestsFixture
                 new AircraftFamily { Id = 110, Name = "Yak-42 Line", Manufacturer = "Yakovlev" }
             ]
         );
+    }
 
+    private void InitAircraftModels()
+    {
         Models.AddRange(
             [
                 new AircraftModel { Id = 201, Name = "MC-21-300-UT", Family = Families[0], FlightRange = 6000, PassengerCapacity = 211, CargoCapacity = 23 },
@@ -66,12 +116,15 @@ public class AirlineTestsFixture
                 new AircraftModel { Id = 207, Name = "Dash8-400-UT", Family = Families[6], FlightRange = 2400, PassengerCapacity = 78, CargoCapacity = 7 },
                 new AircraftModel { Id = 208, Name = "M90-SpaceJet-UT", Family = Families[7], FlightRange = 3300, PassengerCapacity = 88, CargoCapacity = 9 },
                 new AircraftModel { Id = 209, Name = "Falcon-8X-UT", Family = Families[8], FlightRange = 11945, PassengerCapacity = 14, CargoCapacity = 3 },
-                new AircraftModel { Id = 210, Name = "Yak-42D-UT", Family = Families[9], FlightRange = 3000, PassengerCapacity = 120, CargoCapacity = 12 },
+                new AircraftModel { Id = 210, Name = "Yak-42D-UT", Family = Families[9], FlightRange = 3000, PassengerCapacity = 120, CargoCapacity = 12 }
             ]
         );
+    }
 
+    private void InitFlights()
+    {
         Flights.AddRange(
-            [
+        [
                 new Flight
                 {
                     Id = 1,
@@ -136,7 +189,7 @@ public class AirlineTestsFixture
                     DepartureDate = new DateTime(2025,8,6,19,0,0),
                     ArrivalDate = new DateTime(2025,8,6,21,0,0),
                     Duration = TimeSpan.FromHours(2),
-                    AircraftModel =Models[5]
+                    AircraftModel = Models[5]
                 },
                 new Flight
                 {
@@ -184,112 +237,6 @@ public class AirlineTestsFixture
                 }
             ]
         );
-
-        Passengers.AddRange(
-            [
-                new Passenger
-                {
-                    PassportNumber = "P210001",
-                    LastName = "Агафонов",
-                    FirstName = "Антон",
-                    Patronymic = "Алексеевич",
-                    BirthDate = new DateTime(2004, 4, 15)
-                },
-                new Passenger
-                {
-                    PassportNumber = "P210002",
-                    LastName = "Журавлев",
-                    FirstName = "Сергей",
-                    Patronymic = "Александрович",
-                    BirthDate = new DateTime(2004, 9, 7)
-                },
-                new Passenger
-                {
-                    PassportNumber = "P210003",
-                    LastName = "Козловская",
-                    FirstName = "Ксения",
-                    Patronymic = "Александровна",
-                    BirthDate = new DateTime(2004, 1, 22)
-                },
-                new Passenger
-                {
-                    PassportNumber = "P210004",
-                    LastName = "Ксеневич",
-                    FirstName = "Максим",
-                    Patronymic = "Станиславович",
-                    BirthDate = new DateTime(2004, 11, 10)
-                },
-                new Passenger
-                {
-                    PassportNumber = "P210005",
-                    LastName = "Лутфуллин",
-                    FirstName = "Глеб",
-                    Patronymic = "Айдарович",
-                    BirthDate = new DateTime(2004, 3, 28)
-                },
-                new Passenger
-                {
-                    PassportNumber = "P210006",
-                    LastName = "Марченко",
-                    FirstName = "Софья",
-                    Patronymic = "Александровна",
-                    BirthDate = new DateTime(2004, 7, 12)
-                },
-                new Passenger
-                {
-                    PassportNumber = "P210007",
-                    LastName = "Ретивов",
-                    FirstName = "Данила",
-                    Patronymic = "Олегович",
-                    BirthDate = new DateTime(2004, 10, 3)
-                },
-                new Passenger
-                {
-                    PassportNumber = "P210008",
-                    LastName = "Сайдашев",
-                    FirstName = "Андрей",
-                    Patronymic = "Алексеевич",
-                    BirthDate = new DateTime(2003, 6, 19)
-                },
-                new Passenger
-                {
-                    PassportNumber = "P210009",
-                    LastName = "Спиридонова",
-                    FirstName = "Ксения",
-                    Patronymic = "Сергеевна",
-                    BirthDate = new DateTime(2004, 9, 5)
-                },
-                new Passenger
-                {
-                    PassportNumber = "P210010",
-                    LastName = "Яковлев",
-                    FirstName = "Радик",
-                    Patronymic = "Сергеевич",
-                    BirthDate = new DateTime(2005, 12, 30)
-                }
-            ]
-        );
-        var count = Math.Min(Passengers.Count, Flights.Count);
-        for (var i = 0; i < count; ++i)
-        {
-            AddTicket(Flights[i], Passengers[i], $"{1 + i}A", i % 2 != 0, i * 2);
-        }
-
-    }
-    private void AddTicket(Flight flight, Passenger passenger, string seat, bool hasHand, double baggage)
-    {
-        var t = new Ticket
-        {
-            Id = _ticketId++,
-            Flight = flight,
-            Passenger = passenger,
-            SeatNumber = seat,
-            HasHandLuggage = hasHand,
-            BaggageWeight = baggage
-        };
-
-        Tickets.Add(t);
-        (flight.Tickets ??= []).Add(t);
-        (passenger.Tickets ??= []).Add(t);
     }
 }
+

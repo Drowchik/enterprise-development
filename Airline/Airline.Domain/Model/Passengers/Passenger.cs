@@ -9,6 +9,12 @@ namespace Airline.Domain.Model.Passengers;
 public class Passenger
 {
     /// <summary>
+    /// Уникальный идентификатор пассажира
+    /// </summary>
+    [Key]
+    public required int Id { get; set; }
+
+    /// <summary>
     /// Номер паспорта
     /// </summary>
     [Key]
