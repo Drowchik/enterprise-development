@@ -36,8 +36,9 @@ public class DataSeeder
     /// </summary>
     public List<Ticket> Tickets { get; } = [];
 
-    private int _ticketId = 1;
-
+    /// <summary>
+    /// Конструктор, выполняющий инициализацию всех тестовых данных
+    /// </summary>
     public DataSeeder()
     {
         InitAircraftFamilies();
@@ -47,6 +48,9 @@ public class DataSeeder
         InitTickets();
     }
 
+    /// <summary>
+    /// Инициализация билетов и привязка их к рейсам и пассажирам
+    /// </summary>
     private void InitTickets()
     {
         var count = Math.Min(Passengers.Count, Flights.Count);
@@ -54,7 +58,7 @@ public class DataSeeder
         {
             var ticket = new Ticket
             {
-                Id = _ticketId++,
+                Id = i++,
                 Flight = Flights[i],
                 Passenger = Passengers[i],
                 SeatNumber = $"{1 + i}A",
@@ -68,6 +72,9 @@ public class DataSeeder
         }
     }
 
+    /// <summary>
+    /// Инициализация списка пассажиров
+    /// </summary>
     private void InitPassengers()
     {
         Passengers.AddRange(
@@ -85,6 +92,10 @@ public class DataSeeder
             ]
         );
     }
+
+    /// <summary>
+    /// Инициализация списка семейств самолётов
+    /// </summary>
     private void InitAircraftFamilies()
     {
         Families.AddRange(
@@ -103,6 +114,9 @@ public class DataSeeder
         );
     }
 
+    /// <summary>
+    /// Инициализация списка моделей самолётов
+    /// </summary>
     private void InitAircraftModels()
     {
         Models.AddRange(
@@ -121,6 +135,9 @@ public class DataSeeder
         );
     }
 
+    /// <summary>
+    /// Инициализация списка авиарейсов
+    /// </summary>
     private void InitFlights()
     {
         Flights.AddRange(
