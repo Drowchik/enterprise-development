@@ -19,10 +19,10 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore dependencies
-        run: dotnet restore ./Airline.sln
+        run: dotnet restore ./Airline/Airline.sln
 
       - name: Build
-        run: dotnet build ./Airline.sln --no-restore
+        run: dotnet build ./Airline/Airline.sln --no-restore
 
       - name: Test
-        run: dotnet test ./Airline.Tests/Airline.Tests.csproj --no-build --verbosity normal
+        run: dotnet test ./Airline/Airline.Tests/Airline.Tests.csproj --no-build --verbosity normal
