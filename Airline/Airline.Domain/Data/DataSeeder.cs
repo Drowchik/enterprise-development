@@ -58,7 +58,7 @@ public class DataSeeder
         {
             var ticket = new Ticket
             {
-                Id = i++,
+                Id = i + 1,
                 Flight = Flights[i],
                 Passenger = Passengers[i],
                 SeatNumber = $"{1 + i}A",
