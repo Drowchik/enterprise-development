@@ -17,7 +17,6 @@ public class Passenger
     /// <summary>
     /// Номер паспорта
     /// </summary>
-    [Key]
     [StringLength(20)]
     public required string PassportNumber { get; set; }
 

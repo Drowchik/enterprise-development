@@ -41,42 +41,6 @@ public class DataSeeder
     /// </summary>
     public DataSeeder()
     {
-        InitAircraftFamilies();
-        InitAircraftModels();
-        InitFlights();
-        InitPassengers();
-        InitTickets();
-    }
-
-    /// <summary>
-    /// Инициализация билетов и привязка их к рейсам и пассажирам
-    /// </summary>
-    private void InitTickets()
-    {
-        var count = Math.Min(Passengers.Count, Flights.Count);
-        for (var i = 0; i < count; ++i)
-        {
-            var ticket = new Ticket
-            {
-                Id = i + 1,
-                Flight = Flights[i],
-                Passenger = Passengers[i],
-                SeatNumber = $"{1 + i}A",
-                HasHandLuggage = i % 2 != 0,
-                BaggageWeight = i * 2
-            };
-
-            Tickets.Add(ticket);
-            (Flights[i].Tickets ??= []).Add(ticket);
-            (Passengers[i].Tickets ??= []).Add(ticket);
-        }
-    }
-
-    /// <summary>
-    /// Инициализация списка пассажиров
-    /// </summary>
-    private void InitPassengers()
-    {
         Passengers.AddRange(
             [
                 new Passenger { Id = 1, PassportNumber = "P210001", LastName = "Агафонов", FirstName = "Антон", Patronymic = "Алексеевич", BirthDate = new DateTime(2004, 4, 15) },
@@ -91,13 +55,7 @@ public class DataSeeder
                 new Passenger { Id = 10, PassportNumber = "P210010", LastName = "Яковлев", FirstName = "Радик", Patronymic = "Сергеевич", BirthDate = new DateTime(2005, 12, 30) }
             ]
         );
-    }
 
-    /// <summary>
-    /// Инициализация списка семейств самолётов
-    /// </summary>
-    private void InitAircraftFamilies()
-    {
         Families.AddRange(
             [
                 new AircraftFamily { Id = 101, Name = "MC-21 Series", Manufacturer = "Irkut Corporation" },
@@ -112,13 +70,7 @@ public class DataSeeder
                 new AircraftFamily { Id = 110, Name = "Yak-42 Line", Manufacturer = "Yakovlev" }
             ]
         );
-    }
 
-    /// <summary>
-    /// Инициализация списка моделей самолётов
-    /// </summary>
-    private void InitAircraftModels()
-    {
         Models.AddRange(
             [
                 new AircraftModel { Id = 201, Name = "MC-21-300-UT", Family = Families[0], FlightRange = 6000, PassengerCapacity = 211, CargoCapacity = 23 },
@@ -133,15 +85,9 @@ public class DataSeeder
                 new AircraftModel { Id = 210, Name = "Yak-42D-UT", Family = Families[9], FlightRange = 3000, PassengerCapacity = 120, CargoCapacity = 12 }
             ]
         );
-    }
 
-    /// <summary>
-    /// Инициализация списка авиарейсов
-    /// </summary>
-    private void InitFlights()
-    {
         Flights.AddRange(
-        [
+            [
                 new Flight
                 {
                     Id = 1,
@@ -254,6 +200,22 @@ public class DataSeeder
                 }
             ]
         );
+
+        var count = Math.Min(Passengers.Count, Flights.Count);
+        for (var i = 0; i < count; ++i)
+        {
+            var ticket = new Ticket
+            {
+                Id = i + 1,
+                Flight = Flights[i],
+                Passenger = Passengers[i],
+                SeatNumber = $"{1 + i}A",
+                HasHandLuggage = i % 2 != 0,
+                BaggageWeight = i * 2
+            };
+            Tickets.Add(ticket);
+            (Flights[i].Tickets ??= []).Add(ticket);
+            (Passengers[i].Tickets ??= []).Add(ticket);
+        }
     }
 }
-

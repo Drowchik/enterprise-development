@@ -15,13 +15,14 @@ public class AirlineTests(DataSeeder data) : IClassFixture<DataSeeder>
     public void Top5FlightsByPassengerCount()
     {
         var expectedIds = new List<int> { 1, 2, 3, 4, 5 };
-        var flightsIds = data.Flights
+
+        var topFlights = data.Flights
             .OrderByDescending(f => f.Tickets!.Count)
             .Take(5)
-            .Select(f => f.Id)
             .ToList();
 
-        Assert.Equal(expectedIds, flightsIds);
+        Assert.Equal(5, topFlights.Count);
+        Assert.All(expectedIds, id => Assert.Contains(topFlights, f => f.Id == id));
     }
 
     /// <summary>
@@ -35,12 +36,12 @@ public class AirlineTests(DataSeeder data) : IClassFixture<DataSeeder>
         var minDuration = data.Flights
             .Min(f => f.Duration!.Value);
 
-        var flightIds = data.Flights
+        var flights = data.Flights
             .Where(f => f.Duration == minDuration)
-            .Select(f => f.Id)
             .ToList();
 
-        Assert.Equal(expectedIds, flightIds);
+        Assert.Equal(expectedIds.Count, flights.Count);
+        Assert.All(expectedIds, id => Assert.Contains(flights, f => f.Id == id));
     }
 
     /// <summary>
@@ -53,16 +54,16 @@ public class AirlineTests(DataSeeder data) : IClassFixture<DataSeeder>
         var from = new DateTime(2025, 8, 1);
         var to = new DateTime(2025, 8, 31);
 
+        var expectedIds = new List<int> { 1 };
+
         var flights = data.Flights
             .Where(f => f.AircraftModel.Id == modelId
                         && f.DepartureDate >= from
                         && f.DepartureDate <= to)
             .ToList();
 
-        Assert.All(flights, f =>
-            Assert.True(f.AircraftModel.Id == modelId
-                        && f.DepartureDate >= from
-                        && f.DepartureDate <= to));
+        Assert.Equal(expectedIds.Count, flights.Count);
+        Assert.All(expectedIds, id => Assert.Contains(flights, f => f.Id == id));
     }
 
     /// <summary>
@@ -71,6 +72,8 @@ public class AirlineTests(DataSeeder data) : IClassFixture<DataSeeder>
     [Fact]
     public void PassengersWithZeroBaggage()
     {
+        var expectedIds = new List<int> { 1 };
+
         var passengers = data.Tickets
             .Where(t => t.Flight.Code == "UT4101" && t.BaggageWeight == 0)
             .Select(t => t.Passenger)
@@ -79,7 +82,8 @@ public class AirlineTests(DataSeeder data) : IClassFixture<DataSeeder>
             .ThenBy(p => p.Patronymic)
             .ToList();
 
-        Assert.All(passengers, p => Assert.Equal(0, data.Tickets.First(t => t.Passenger == p).BaggageWeight));
+        Assert.Equal(expectedIds.Count, passengers.Count);
+        Assert.All(expectedIds, id => Assert.Contains(passengers, p => p.Id == id));
     }
 
     /// <summary>
@@ -90,13 +94,11 @@ public class AirlineTests(DataSeeder data) : IClassFixture<DataSeeder>
     {
         var expectedIds = new List<int> { 1, 6, 9 };
 
-        var flightIds = data.Flights
+        var flights = data.Flights
             .Where(f => f.DeparturePoint == "KBP" && f.ArrivalPoint == "IST")
-            .Select(f => f.Id)
             .ToList();
 
-        Assert.Equal(expectedIds, flightIds);
+        Assert.Equal(expectedIds.Count, flights.Count);
+        Assert.All(expectedIds, id => Assert.Contains(flights, f => f.Id == id));
     }
-
-
 }
