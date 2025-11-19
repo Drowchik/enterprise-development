@@ -15,17 +15,17 @@ public class FlightRepository(AirlineDbContext context) : IRepository<Flight, in
         throw new NotImplementedException();
     }
 
+    public Task<Flight?> Read(int entityId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IList<Flight>> ReadAll()
+    {
+        throw new NotImplementedException();
+    }
+
     public Task<Flight> Update(Flight entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    Task<Flight?> IRepository<Flight, int>.Read(int entityId)
-    {
-        throw new NotImplementedException();
-    }
-
-    Task<IList<Flight>> IRepository<Flight, int>.ReadAll()
     {
         throw new NotImplementedException();
     }

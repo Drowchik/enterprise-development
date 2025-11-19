@@ -73,16 +73,16 @@ public class DataSeeder
 
         Models.AddRange(
             [
-                new AircraftModel { Id = 201, Name = "MC-21-300-UT", Family = Families[0], FlightRange = 6000, PassengerCapacity = 211, CargoCapacity = 23 },
-                new AircraftModel { Id = 202, Name = "Tu-214SM-UT", Family = Families[1], FlightRange = 6500, PassengerCapacity = 215, CargoCapacity = 25 },
-                new AircraftModel { Id = 203, Name = "Q400NG-UT", Family = Families[2], FlightRange = 2500, PassengerCapacity = 82, CargoCapacity = 8 },
-                new AircraftModel { Id = 204, Name = "Il-96-400M-UT", Family = Families[3], FlightRange = 11000, PassengerCapacity = 350, CargoCapacity = 55 },
-                new AircraftModel { Id = 205, Name = "ARJ21-700-UT", Family = Families[4], FlightRange = 3700, PassengerCapacity = 90, CargoCapacity = 10 },
-                new AircraftModel { Id = 206, Name = "CS300-UT", Family = Families[5], FlightRange = 6100, PassengerCapacity = 145, CargoCapacity = 18 },
-                new AircraftModel { Id = 207, Name = "Dash8-400-UT", Family = Families[6], FlightRange = 2400, PassengerCapacity = 78, CargoCapacity = 7 },
-                new AircraftModel { Id = 208, Name = "M90-SpaceJet-UT", Family = Families[7], FlightRange = 3300, PassengerCapacity = 88, CargoCapacity = 9 },
-                new AircraftModel { Id = 209, Name = "Falcon-8X-UT", Family = Families[8], FlightRange = 11945, PassengerCapacity = 14, CargoCapacity = 3 },
-                new AircraftModel { Id = 210, Name = "Yak-42D-UT", Family = Families[9], FlightRange = 3000, PassengerCapacity = 120, CargoCapacity = 12 }
+                new AircraftModel { Id = 201, Name = "MC-21-300-UT", FamilyId = 101, Family = Families[0], FlightRange = 6000, PassengerCapacity = 211, CargoCapacity = 23 },
+                new AircraftModel { Id = 202, Name = "Tu-214SM-UT", FamilyId = 102, Family = Families[1], FlightRange = 6500, PassengerCapacity = 215, CargoCapacity = 25 },
+                new AircraftModel { Id = 203, Name = "Q400NG-UT", FamilyId = 103, Family = Families[2], FlightRange = 2500, PassengerCapacity = 82, CargoCapacity = 8 },
+                new AircraftModel { Id = 204, Name = "Il-96-400M-UT", FamilyId = 104, Family = Families[3], FlightRange = 11000, PassengerCapacity = 350, CargoCapacity = 55 },
+                new AircraftModel { Id = 205, Name = "ARJ21-700-UT", FamilyId = 105, Family = Families[4], FlightRange = 3700, PassengerCapacity = 90, CargoCapacity = 10 },
+                new AircraftModel { Id = 206, Name = "CS300-UT", FamilyId = 106, Family = Families[5], FlightRange = 6100, PassengerCapacity = 145, CargoCapacity = 18 },
+                new AircraftModel { Id = 207, Name = "Dash8-400-UT", FamilyId = 107, Family = Families[6], FlightRange = 2400, PassengerCapacity = 78, CargoCapacity = 7 },
+                new AircraftModel { Id = 208, Name = "M90-SpaceJet-UT", FamilyId = 108, Family = Families[7], FlightRange = 3300, PassengerCapacity = 88, CargoCapacity = 9 },
+                new AircraftModel { Id = 209, Name = "Falcon-8X-UT", FamilyId = 109, Family = Families[8], FlightRange = 11945, PassengerCapacity = 14, CargoCapacity = 3 },
+                new AircraftModel { Id = 210, Name = "Yak-42D-UT", FamilyId = 110, Family = Families[9], FlightRange = 3000, PassengerCapacity = 120, CargoCapacity = 12 }
             ]
         );
 
@@ -97,6 +97,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,1,9,0,0),
                     ArrivalDate = new DateTime(2025,8,1,11,0,0),
                     Duration = TimeSpan.FromHours(2),
+                    AicraftModelId = 201,
                     AircraftModel = Models[0]
                 },
                 new Flight
@@ -108,6 +109,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,2,13,0,0),
                     ArrivalDate = new DateTime(2025,8,2,16,0,0),
                     Duration = TimeSpan.FromHours(3),
+                    AicraftModelId = 202,
                     AircraftModel = Models[1]
                 },
                 new Flight
@@ -119,6 +121,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,3,10,0,0),
                     ArrivalDate = new DateTime(2025,8,3,12,0,0),
                     Duration = TimeSpan.FromHours(2),
+                    AicraftModelId = 203,
                     AircraftModel = Models[2]
                 },
                 new Flight
@@ -130,6 +133,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,4,8,0,0),
                     ArrivalDate = new DateTime(2025,8,4,9,0,0),
                     Duration = TimeSpan.FromHours(1),
+                    AicraftModelId = 204,
                     AircraftModel = Models[3]
                 },
                 new Flight
@@ -141,6 +145,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,5,12,0,0),
                     ArrivalDate = new DateTime(2025,8,5,13,0,0),
                     Duration = TimeSpan.FromHours(1),
+                    AicraftModelId = 205,
                     AircraftModel = Models[4]
                 },
                 new Flight
@@ -152,6 +157,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,6,19,0,0),
                     ArrivalDate = new DateTime(2025,8,6,21,0,0),
                     Duration = TimeSpan.FromHours(2),
+                    AicraftModelId = 206, 
                     AircraftModel = Models[5]
                 },
                 new Flight
@@ -163,6 +169,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,7,6,0,0),
                     ArrivalDate = new DateTime(2025,8,7,13,0,0),
                     Duration = TimeSpan.FromHours(7),
+                    AicraftModelId = 207,
                     AircraftModel = Models[6]
                 },
                 new Flight
@@ -174,6 +181,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,8,22,0,0),
                     ArrivalDate = new DateTime(2025,8,9,5,0,0),
                     Duration = TimeSpan.FromHours(7),
+                    AicraftModelId = 208,
                     AircraftModel = Models[7]
                 },
                 new Flight
@@ -185,6 +193,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,9,7,0,0),
                     ArrivalDate = new DateTime(2025,8,9,9,0,0),
                     Duration = TimeSpan.FromHours(2),
+                    AicraftModelId = 209,
                     AircraftModel = Models[8]
                 },
                 new Flight
@@ -196,6 +205,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,10,14,0,0),
                     ArrivalDate = new DateTime(2025,8,10,15,30,0),
                     Duration = TimeSpan.FromHours(1),
+                    AicraftModelId = 210,
                     AircraftModel = Models[9]
                 }
             ]
@@ -207,7 +217,9 @@ public class DataSeeder
             var ticket = new Ticket
             {
                 Id = i + 1,
+                FlightId = i + 1,
                 Flight = Flights[i],
+                PassengerId = i + 1,
                 Passenger = Passengers[i],
                 SeatNumber = $"{1 + i}A",
                 HasHandLuggage = i % 2 != 0,

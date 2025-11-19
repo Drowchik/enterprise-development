@@ -16,29 +16,44 @@ public class Ticket
     public required int Id { get; set; }
 
     /// <summary>
-    /// Ссылка на рейс, к которому относится билет
+    /// Ключ на рейс, к которому относится билет
     /// </summary>
-    public required Flight Flight { get; set; }
+    [Required]
+    public required int FlightId { get; set; }
 
     /// <summary>
-    /// Ссылка на пассажира, которому принадлежит билет
+    /// Рейс, к которому относится билет
     /// </summary>
-    public required Passenger Passenger { get; set; }
+    public Flight? Flight { get; set; }
+
+    /// <summary>
+    /// Ключ на пассажира, которому принадлежит билет
+    /// </summary>
+    [Required]
+    public required int PassengerId { get; set; }
+
+    /// <summary>
+    /// Пассажир, которому принадлежит билет
+    /// </summary>
+    public Passenger? Passenger { get; set; }
 
     /// <summary>
     /// Номер сидения
     /// </summary>
-    [StringLength(10)]
+    [StringLength(10, ErrorMessage = "Номер сидения не должен превышать 10 символов")]
+    [Required]
     public required string SeatNumber { get; set; }
 
     /// <summary>
     /// Наличие ручной клади
     /// </summary>
+    [Required]
     public required bool HasHandLuggage { get; set; }
 
     /// <summary>
     /// Общий вес багажа (в килограммах)
     /// </summary>
     [Range(0, 200, ErrorMessage = "Вес багажа должен быть в диапазоне от 0 до 200 кг")]
+    [Required]
     public required double BaggageWeight { get; set; }
 }

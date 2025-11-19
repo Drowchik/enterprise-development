@@ -10,17 +10,22 @@ public class PassengerRepository(AirlineDbContext context) : IRepository<Passeng
         throw new NotImplementedException();
     }
 
+    public Task<bool> Delete(int entityId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Passenger?> Read(int entityId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IList<Passenger>> ReadAll()
+    {
+        throw new NotImplementedException();
+    }
+
     public Task<Passenger> Update(Passenger entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    Task<Passenger?> IRepository<Passenger, int>.Read(int entityId)
-    {
-        throw new NotImplementedException();
-    }
-
-    Task<IList<Passenger>> IRepository<Passenger, int>.ReadAll()
     {
         throw new NotImplementedException();
     }
