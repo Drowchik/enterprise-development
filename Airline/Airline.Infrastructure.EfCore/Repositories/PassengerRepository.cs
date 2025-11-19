@@ -1,32 +1,73 @@
 ﻿using Airline.Domain;
 using Airline.Domain.Model.Passengers;
+using Microsoft.EntityFrameworkCore;
 
 namespace Airline.Infrastructure.EfCore.Repositories;
 
+/// <summary>
+/// Репозиторий для работы с коллекцией пассажиров
+/// </summary>
 public class PassengerRepository(AirlineDbContext context) : IRepository<Passenger, int>
 {
-    public Task<Passenger> Create(Passenger entity)
+    /// <summary>
+    /// Создать нового пассажира
+    /// </summary>
+    /// <param name="entity">Пассажир</param>
+    /// <returns>Созданный пассажир</returns>
+    public async Task<Passenger> Create(Passenger entity)
     {
-        throw new NotImplementedException();
+        var result = await context.Passengers.AddAsync(entity);
+
+        await context.SaveChangesAsync();
+
+        return result.Entity;
     }
 
-    public Task<bool> Delete(int entityId)
+    /// <summary>
+    /// Удалить пассажира по идентификатору
+    /// </summary>
+    /// <param name="entityId">Идентификатор пассажира</param>
+    /// <returns>true если удаление прошло успешно иначе false</returns>
+    public async Task<bool> Delete(int entityId)
     {
-        throw new NotImplementedException();
+        var entity = await context.Passengers.FirstOrDefaultAsync(e => e.Id == entityId);
+
+        if (entity == null)
+            return false;
+
+        context.Passengers.Remove(entity);
+
+        await context.SaveChangesAsync();
+
+        return true;
     }
 
-    public Task<Passenger?> Read(int entityId)
-    {
-        throw new NotImplementedException();
-    }
+    /// <summary>
+    /// Получить пассажира по идентификатору
+    /// </summary>
+    /// <param name="entityId">Идентификатор пассажира</param>
+    /// <returns>Пассажир или null если не найден</returns>
+    public async Task<Passenger?> Read(int entityId) =>
+        await context.Passengers.FirstOrDefaultAsync(e => e.Id == entityId);
 
-    public Task<IList<Passenger>> ReadAll()
-    {
-        throw new NotImplementedException();
-    }
+    /// <summary>
+    /// Получить всех пассажиров
+    /// </summary>
+    /// <returns>Список всех пассажиров</returns>
+    public async Task<IList<Passenger>> ReadAll() =>
+        await context.Passengers.ToListAsync();
 
-    public Task<Passenger> Update(Passenger entity)
+    /// <summary>
+    /// Обновить данные пассажира
+    /// </summary>
+    /// <param name="entity">Пассажир с новыми данными</param>
+    /// <returns>Обновлённый пассажир</returns>
+    public async Task<Passenger> Update(Passenger entity)
     {
-        throw new NotImplementedException();
+        context.Passengers.Update(entity);
+
+        await context.SaveChangesAsync();
+
+        return entity;
     }
 }

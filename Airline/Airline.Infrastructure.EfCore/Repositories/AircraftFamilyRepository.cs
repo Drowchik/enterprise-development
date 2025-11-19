@@ -1,32 +1,73 @@
 ﻿using Airline.Domain;
 using Airline.Domain.Model.AircraftFamilies;
+using Microsoft.EntityFrameworkCore;
 
 namespace Airline.Infrastructure.EfCore.Repositories;
 
+/// <summary>
+/// Репозиторий для работы с коллекцией семейств самолётов
+/// </summary>
 public class AircraftFamilyRepository(AirlineDbContext context) : IRepository<AircraftFamily, int>
 {
-    public Task<AircraftFamily> Create(AircraftFamily entity)
+    /// <summary>
+    /// Создать новое семейство самолётов
+    /// </summary>
+    /// <param name="entity">Семейство самолётов</param>
+    /// <returns>Созданное семейство самолётов</returns>
+    public async Task<AircraftFamily> Create(AircraftFamily entity)
     {
-        throw new NotImplementedException();
+        var result = await context.Families.AddAsync(entity);
+
+        await context.SaveChangesAsync();
+
+        return result.Entity;
     }
 
-    public Task<bool> Delete(int entityId)
+    /// <summary>
+    /// Удалить семейство самолётов по идентификатору
+    /// </summary>
+    /// <param name="entityId">Идентификатор семейства</param>
+    /// <returns>true если удаление прошло успешно иначе false</returns>
+    public async Task<bool> Delete(int entityId)
     {
-        throw new NotImplementedException();
+        var entity = await context.Families.FirstOrDefaultAsync(e => e.Id == entityId);
+
+        if (entity == null)
+            return false;
+
+        context.Families.Remove(entity);
+
+        await context.SaveChangesAsync();
+
+        return true;
     }
 
-    public Task<AircraftFamily?> Read(int entityId)
-    {
-        throw new NotImplementedException();
-    }
+    /// <summary>
+    /// Получить семейство самолётов по идентификатору
+    /// </summary>
+    /// <param name="entityId">Идентификатор семейства</param>
+    /// <returns>Семейство самолётов или null если не найдено</returns>
+    public async Task<AircraftFamily?> Read(int entityId) =>
+        await context.Families.FirstOrDefaultAsync(e => e.Id == entityId);
 
-    public Task<IList<AircraftFamily>> ReadAll()
-    {
-        throw new NotImplementedException();
-    }
+    /// <summary>
+    /// Получить все семейства самолётов
+    /// </summary>
+    /// <returns>Список всех семейств самолётов</returns>
+    public async Task<IList<AircraftFamily>> ReadAll() =>
+        await context.Families.ToListAsync();
 
-    public Task<AircraftFamily> Update(AircraftFamily entity)
+    /// <summary>
+    /// Обновить данные семейства самолётов
+    /// </summary>
+    /// <param name="entity">Семейство самолётов с новыми данными</param>
+    /// <returns>Обновлённое семейство самолётов</returns>
+    public async Task<AircraftFamily> Update(AircraftFamily entity)
     {
-        throw new NotImplementedException();
+        context.Families.Update(entity);
+
+        await context.SaveChangesAsync();
+
+        return entity;
     }
 }
