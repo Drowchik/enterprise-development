@@ -97,7 +97,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,1,9,0,0),
                     ArrivalDate = new DateTime(2025,8,1,11,0,0),
                     Duration = TimeSpan.FromHours(2),
-                    AicraftModelId = 201,
+                    AircraftModelId = 201,
                     AircraftModel = Models[0]
                 },
                 new Flight
@@ -109,7 +109,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,2,13,0,0),
                     ArrivalDate = new DateTime(2025,8,2,16,0,0),
                     Duration = TimeSpan.FromHours(3),
-                    AicraftModelId = 202,
+                    AircraftModelId = 202,
                     AircraftModel = Models[1]
                 },
                 new Flight
@@ -121,7 +121,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,3,10,0,0),
                     ArrivalDate = new DateTime(2025,8,3,12,0,0),
                     Duration = TimeSpan.FromHours(2),
-                    AicraftModelId = 203,
+                    AircraftModelId = 203,
                     AircraftModel = Models[2]
                 },
                 new Flight
@@ -133,7 +133,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,4,8,0,0),
                     ArrivalDate = new DateTime(2025,8,4,9,0,0),
                     Duration = TimeSpan.FromHours(1),
-                    AicraftModelId = 204,
+                    AircraftModelId = 204,
                     AircraftModel = Models[3]
                 },
                 new Flight
@@ -145,7 +145,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,5,12,0,0),
                     ArrivalDate = new DateTime(2025,8,5,13,0,0),
                     Duration = TimeSpan.FromHours(1),
-                    AicraftModelId = 205,
+                    AircraftModelId = 205,
                     AircraftModel = Models[4]
                 },
                 new Flight
@@ -157,7 +157,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,6,19,0,0),
                     ArrivalDate = new DateTime(2025,8,6,21,0,0),
                     Duration = TimeSpan.FromHours(2),
-                    AicraftModelId = 206, 
+                    AircraftModelId = 206, 
                     AircraftModel = Models[5]
                 },
                 new Flight
@@ -169,7 +169,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,7,6,0,0),
                     ArrivalDate = new DateTime(2025,8,7,13,0,0),
                     Duration = TimeSpan.FromHours(7),
-                    AicraftModelId = 207,
+                    AircraftModelId = 207,
                     AircraftModel = Models[6]
                 },
                 new Flight
@@ -181,7 +181,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,8,22,0,0),
                     ArrivalDate = new DateTime(2025,8,9,5,0,0),
                     Duration = TimeSpan.FromHours(7),
-                    AicraftModelId = 208,
+                    AircraftModelId = 208,
                     AircraftModel = Models[7]
                 },
                 new Flight
@@ -193,7 +193,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,9,7,0,0),
                     ArrivalDate = new DateTime(2025,8,9,9,0,0),
                     Duration = TimeSpan.FromHours(2),
-                    AicraftModelId = 209,
+                    AircraftModelId = 209,
                     AircraftModel = Models[8]
                 },
                 new Flight
@@ -205,7 +205,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,10,14,0,0),
                     ArrivalDate = new DateTime(2025,8,10,15,30,0),
                     Duration = TimeSpan.FromHours(1),
-                    AicraftModelId = 210,
+                    AircraftModelId = 210,
                     AircraftModel = Models[9]
                 }
             ]

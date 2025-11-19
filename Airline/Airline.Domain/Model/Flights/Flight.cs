@@ -46,7 +46,7 @@ public class Flight
     /// <summary>
     /// Ключ на модель самолёта, выполняющую рейс
     /// </summary>
-    public required int AicraftModelId { get; set; }
+    public required int AircraftModelId { get; set; }
 
     /// <summary>
     /// Модель самолёта, выполняющая рейс

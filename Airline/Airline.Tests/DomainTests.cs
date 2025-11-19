@@ -57,7 +57,7 @@ public class AirlineTests(DataSeeder data) : IClassFixture<DataSeeder>
         var expectedIds = new List<int> { 1 };
 
         var flights = data.Flights
-            .Where(f => f.AircraftModel.Id == modelId
+            .Where(f => f.AircraftModel!.Id == modelId
                         && f.DepartureDate >= from
                         && f.DepartureDate <= to)
             .ToList();
@@ -75,8 +75,8 @@ public class AirlineTests(DataSeeder data) : IClassFixture<DataSeeder>
         var expectedIds = new List<int> { 1 };
 
         var passengers = data.Tickets
-            .Where(t => t.Flight.Code == "UT4101" && t.BaggageWeight == 0)
-            .Select(t => t.Passenger)
+            .Where(t => t.Flight!.Code == "UT4101" && t.BaggageWeight == 0)
+            .Select(t => t.Passenger!)
             .OrderBy(p => p.LastName)
             .ThenBy(p => p.FirstName)
             .ThenBy(p => p.Patronymic)
