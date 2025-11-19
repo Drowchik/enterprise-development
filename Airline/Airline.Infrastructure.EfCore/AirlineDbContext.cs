@@ -73,7 +73,7 @@ public class AirlineDbContext(DbContextOptions options) : DbContext(options)
 
             builder.HasMany(m => m.Flights)
                     .WithOne(f => f.AircraftModel)
-                    .HasForeignKey(f => f.AicraftModelId);
+                    .HasForeignKey(f => f.AircraftModelId);
         });
 
         modelBuilder.Entity<Passenger>(builder =>
@@ -106,7 +106,7 @@ public class AirlineDbContext(DbContextOptions options) : DbContext(options)
             builder.Property(f => f.DepartureDate).HasElementName("departure_date");
             builder.Property(f => f.ArrivalDate).HasElementName("arrival_date");
             builder.Property(f => f.Duration).HasElementName("duration");
-            builder.Property(f => f.AicraftModelId).HasElementName("aircraft_model_id");
+            builder.Property(f => f.AircraftModelId).HasElementName("aircraft_model_id");
 
             builder.HasMany(f => f.Tickets)
                .WithOne(t => t.Flight)
