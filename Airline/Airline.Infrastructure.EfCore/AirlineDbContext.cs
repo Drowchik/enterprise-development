@@ -43,6 +43,8 @@ public class AirlineDbContext(DbContextOptions options) : DbContext(options)
     /// </summary>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        Database.AutoTransactionBehavior = AutoTransactionBehavior.Never;
+
         modelBuilder.Entity<AircraftFamily>(builder =>
         {
             builder.ToCollection("aircraft_families");
