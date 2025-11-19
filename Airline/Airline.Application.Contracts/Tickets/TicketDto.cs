@@ -11,10 +11,6 @@ namespace Airline.Application.Contracts.Tickets;
 /// <param name="BaggageWeight">Вес багажа в кг</param>
 public record TicketDto(
     int Id,
-    [Required(ErrorMessage = "Рейс обязателен")]
-    int FlightId,
-    [Required(ErrorMessage = "Пассажир обязателен")]
-    int PassengerId,
     [Required(ErrorMessage = "Номер сидения обязателен")]
     [StringLength(10, ErrorMessage = "Номер сидения не должен превышать 10 символов")]
     string SeatNumber,

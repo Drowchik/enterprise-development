@@ -58,31 +58,31 @@ public class DataSeeder
 
         Families.AddRange(
             [
-                new AircraftFamily { Id = 101, Name = "MC-21 Series", Manufacturer = "Irkut Corporation" },
-                new AircraftFamily { Id = 102, Name = "Tu-214 Line", Manufacturer = "Tupolev" },
-                new AircraftFamily { Id = 103, Name = "Q400 Series", Manufacturer = "De Havilland Canada" },
-                new AircraftFamily { Id = 104, Name = "Il-96 Family", Manufacturer = "Ilyushin" },
-                new AircraftFamily { Id = 105, Name = "ARJ21 Family", Manufacturer = "COMAC" },
-                new AircraftFamily { Id = 106, Name = "CSeries Family", Manufacturer = "Bombardier" },
-                new AircraftFamily { Id = 107, Name = "Dash 8 Family", Manufacturer = "De Havilland Canada" },
-                new AircraftFamily { Id = 108, Name = "Mitsubishi SpaceJet", Manufacturer = "Mitsubishi Aircraft" },
-                new AircraftFamily { Id = 109, Name = "Falcon Family", Manufacturer = "Dassault Aviation" },
-                new AircraftFamily { Id = 110, Name = "Yak-42 Line", Manufacturer = "Yakovlev" }
+                new AircraftFamily { Id = 1, Name = "MC-21 Series", Manufacturer = "Irkut Corporation" },
+                new AircraftFamily { Id = 2, Name = "Tu-214 Line", Manufacturer = "Tupolev" },
+                new AircraftFamily { Id = 3, Name = "Q400 Series", Manufacturer = "De Havilland Canada" },
+                new AircraftFamily { Id = 4, Name = "Il-96 Family", Manufacturer = "Ilyushin" },
+                new AircraftFamily { Id = 5, Name = "ARJ21 Family", Manufacturer = "COMAC" },
+                new AircraftFamily { Id = 6, Name = "CSeries Family", Manufacturer = "Bombardier" },
+                new AircraftFamily { Id = 7, Name = "Dash 8 Family", Manufacturer = "De Havilland Canada" },
+                new AircraftFamily { Id = 8, Name = "Mitsubishi SpaceJet", Manufacturer = "Mitsubishi Aircraft" },
+                new AircraftFamily { Id = 9, Name = "Falcon Family", Manufacturer = "Dassault Aviation" },
+                new AircraftFamily { Id = 10, Name = "Yak-42 Line", Manufacturer = "Yakovlev" }
             ]
         );
 
         Models.AddRange(
             [
-                new AircraftModel { Id = 201, Name = "MC-21-300-UT", FamilyId = 101, Family = Families[0], FlightRange = 6000, PassengerCapacity = 211, CargoCapacity = 23 },
-                new AircraftModel { Id = 202, Name = "Tu-214SM-UT", FamilyId = 102, Family = Families[1], FlightRange = 6500, PassengerCapacity = 215, CargoCapacity = 25 },
-                new AircraftModel { Id = 203, Name = "Q400NG-UT", FamilyId = 103, Family = Families[2], FlightRange = 2500, PassengerCapacity = 82, CargoCapacity = 8 },
-                new AircraftModel { Id = 204, Name = "Il-96-400M-UT", FamilyId = 104, Family = Families[3], FlightRange = 11000, PassengerCapacity = 350, CargoCapacity = 55 },
-                new AircraftModel { Id = 205, Name = "ARJ21-700-UT", FamilyId = 105, Family = Families[4], FlightRange = 3700, PassengerCapacity = 90, CargoCapacity = 10 },
-                new AircraftModel { Id = 206, Name = "CS300-UT", FamilyId = 106, Family = Families[5], FlightRange = 6100, PassengerCapacity = 145, CargoCapacity = 18 },
-                new AircraftModel { Id = 207, Name = "Dash8-400-UT", FamilyId = 107, Family = Families[6], FlightRange = 2400, PassengerCapacity = 78, CargoCapacity = 7 },
-                new AircraftModel { Id = 208, Name = "M90-SpaceJet-UT", FamilyId = 108, Family = Families[7], FlightRange = 3300, PassengerCapacity = 88, CargoCapacity = 9 },
-                new AircraftModel { Id = 209, Name = "Falcon-8X-UT", FamilyId = 109, Family = Families[8], FlightRange = 11945, PassengerCapacity = 14, CargoCapacity = 3 },
-                new AircraftModel { Id = 210, Name = "Yak-42D-UT", FamilyId = 110, Family = Families[9], FlightRange = 3000, PassengerCapacity = 120, CargoCapacity = 12 }
+                new AircraftModel { Id = 1, Name = "MC-21-300-UT", FamilyId = 1, Family = Families[0], FlightRange = 6000, PassengerCapacity = 211, CargoCapacity = 23 },
+                new AircraftModel { Id = 2, Name = "Tu-214SM-UT", FamilyId = 2, Family = Families[1], FlightRange = 6500, PassengerCapacity = 215, CargoCapacity = 25 },
+                new AircraftModel { Id = 3, Name = "Q400NG-UT", FamilyId = 3, Family = Families[2], FlightRange = 2500, PassengerCapacity = 82, CargoCapacity = 8 },
+                new AircraftModel { Id = 4, Name = "Il-96-400M-UT", FamilyId = 4, Family = Families[3], FlightRange = 11000, PassengerCapacity = 350, CargoCapacity = 55 },
+                new AircraftModel { Id = 5, Name = "ARJ21-700-UT", FamilyId = 5, Family = Families[4], FlightRange = 3700, PassengerCapacity = 90, CargoCapacity = 10 },
+                new AircraftModel { Id = 6, Name = "CS300-UT", FamilyId = 6, Family = Families[5], FlightRange = 6100, PassengerCapacity = 145, CargoCapacity = 18 },
+                new AircraftModel { Id = 7, Name = "Dash8-400-UT", FamilyId = 7, Family = Families[6], FlightRange = 2400, PassengerCapacity = 78, CargoCapacity = 7 },
+                new AircraftModel { Id = 8, Name = "M90-SpaceJet-UT", FamilyId = 8, Family = Families[7], FlightRange = 3300, PassengerCapacity = 88, CargoCapacity = 9 },
+                new AircraftModel { Id = 9, Name = "Falcon-8X-UT", FamilyId = 9, Family = Families[8], FlightRange = 11945, PassengerCapacity = 14, CargoCapacity = 3 },
+                new AircraftModel { Id = 10, Name = "Yak-42D-UT", FamilyId = 10, Family = Families[9], FlightRange = 3000, PassengerCapacity = 120, CargoCapacity = 12 }
             ]
         );
 
@@ -97,7 +97,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,1,9,0,0),
                     ArrivalDate = new DateTime(2025,8,1,11,0,0),
                     Duration = TimeSpan.FromHours(2),
-                    AircraftModelId = 201,
+                    AircraftModelId = 1,
                     AircraftModel = Models[0]
                 },
                 new Flight
@@ -109,7 +109,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,2,13,0,0),
                     ArrivalDate = new DateTime(2025,8,2,16,0,0),
                     Duration = TimeSpan.FromHours(3),
-                    AircraftModelId = 202,
+                    AircraftModelId = 2,
                     AircraftModel = Models[1]
                 },
                 new Flight
@@ -121,7 +121,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,3,10,0,0),
                     ArrivalDate = new DateTime(2025,8,3,12,0,0),
                     Duration = TimeSpan.FromHours(2),
-                    AircraftModelId = 203,
+                    AircraftModelId = 3,
                     AircraftModel = Models[2]
                 },
                 new Flight
@@ -133,7 +133,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,4,8,0,0),
                     ArrivalDate = new DateTime(2025,8,4,9,0,0),
                     Duration = TimeSpan.FromHours(1),
-                    AircraftModelId = 204,
+                    AircraftModelId = 4,
                     AircraftModel = Models[3]
                 },
                 new Flight
@@ -145,7 +145,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,5,12,0,0),
                     ArrivalDate = new DateTime(2025,8,5,13,0,0),
                     Duration = TimeSpan.FromHours(1),
-                    AircraftModelId = 205,
+                    AircraftModelId = 5,
                     AircraftModel = Models[4]
                 },
                 new Flight
@@ -157,7 +157,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,6,19,0,0),
                     ArrivalDate = new DateTime(2025,8,6,21,0,0),
                     Duration = TimeSpan.FromHours(2),
-                    AircraftModelId = 206, 
+                    AircraftModelId = 6, 
                     AircraftModel = Models[5]
                 },
                 new Flight
@@ -169,7 +169,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,7,6,0,0),
                     ArrivalDate = new DateTime(2025,8,7,13,0,0),
                     Duration = TimeSpan.FromHours(7),
-                    AircraftModelId = 207,
+                    AircraftModelId = 7,
                     AircraftModel = Models[6]
                 },
                 new Flight
@@ -181,7 +181,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,8,22,0,0),
                     ArrivalDate = new DateTime(2025,8,9,5,0,0),
                     Duration = TimeSpan.FromHours(7),
-                    AircraftModelId = 208,
+                    AircraftModelId = 8,
                     AircraftModel = Models[7]
                 },
                 new Flight
@@ -193,7 +193,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,9,7,0,0),
                     ArrivalDate = new DateTime(2025,8,9,9,0,0),
                     Duration = TimeSpan.FromHours(2),
-                    AircraftModelId = 209,
+                    AircraftModelId = 9,
                     AircraftModel = Models[8]
                 },
                 new Flight
@@ -205,7 +205,7 @@ public class DataSeeder
                     DepartureDate = new DateTime(2025,8,10,14,0,0),
                     ArrivalDate = new DateTime(2025,8,10,15,30,0),
                     Duration = TimeSpan.FromHours(1),
-                    AircraftModelId = 210,
+                    AircraftModelId = 10,
                     AircraftModel = Models[9]
                 }
             ]

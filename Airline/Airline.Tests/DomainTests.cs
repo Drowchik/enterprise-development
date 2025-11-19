@@ -50,7 +50,7 @@ public class AirlineTests(DataSeeder data) : IClassFixture<DataSeeder>
     [Fact]
     public void FlightsOfModelWithinPeriod()
     {
-        var modelId = 201;
+        var modelId = 1;
         var from = new DateTime(2025, 8, 1);
         var to = new DateTime(2025, 8, 31);
 
