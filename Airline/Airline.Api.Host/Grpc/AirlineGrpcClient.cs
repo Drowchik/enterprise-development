@@ -69,17 +69,11 @@ public class AirlineGrpcClient(
 
                     foreach (var dto in dtos)
                     {
-                        if (!await ExistsAsync(dto.FlightId, _flightExists, flightRepo.Get, stoppingToken))
-                        {
-                            logger.LogWarning("Skipping ticket dto because flight with id {flightId} was not found passengerId={passengerId}", dto.FlightId, dto.PassengerId);
+                        if (!await ExistsAsync(dto.FlightId, _flightExists, flightRepo.Get, "Flight", dto, stoppingToken))
                             continue;
-                        }
 
-                        if (!await ExistsAsync(dto.PassengerId, _passengerExists, passengerRepo.Get, stoppingToken))
-                        {
-                            logger.LogWarning("Skipping ticket dto because passenger with id {passengerId} was not found flightId={flightId}", dto.PassengerId, dto.FlightId);
+                        if (!await ExistsAsync(dto.PassengerId, _passengerExists, passengerRepo.Get, "Passenger", dto, stoppingToken))
                             continue;
-                        }
 
                         valid.Add(dto);
                     }
@@ -118,17 +112,34 @@ public class AirlineGrpcClient(
     /// <summary>
     /// Проверка наличия сущности по идентификатору с использованием кэша чтобы не выполнять повторные запросы
     /// </summary>
-    private static async Task<bool> ExistsAsync<TEntity>(int id, ConcurrentDictionary<int, bool> cache, Func<int, Task<TEntity?>> readFunc, CancellationToken ct)
+    private async Task<bool> ExistsAsync<TEntity>(
+        int id,
+        ConcurrentDictionary<int, bool> cache,
+        Func<int, Task<TEntity?>> readFunc,
+        string entityName,
+        TicketCreateUpdateDto dto,
+        CancellationToken ct)
         where TEntity : class
     {
         if (cache.TryGetValue(id, out var cached))
             return cached;
 
         ct.ThrowIfCancellationRequested();
-        var entity = await readFunc(id);
-        var ok = entity is not null;
 
-        cache.TryAdd(id, ok);
-        return ok;
+        try
+        {
+            var entity = await readFunc(id);
+            var ok = entity is not null;
+            cache.TryAdd(id, ok);
+            return ok;
+        }
+        catch (KeyNotFoundException)
+        {
+            cache.TryAdd(id, false);
+
+            logger.LogWarning("Skipping ticket dto because {entity} with id {id} was not found flightId={flightId} passengerId={passengerId}", entityName, id, dto.FlightId, dto.PassengerId);
+
+            return false;
+        }
     }
 }

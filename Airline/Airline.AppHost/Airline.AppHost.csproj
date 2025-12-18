@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Airline.Api.Host\Airline.Api.Host.csproj" />
+    <ProjectReference Include="..\Airline.Generator.Grpc.Host\Airline.Generator.Grpc.Host.csproj" />
   </ItemGroup>
 
 </Project>

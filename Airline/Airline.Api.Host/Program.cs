@@ -73,9 +73,16 @@ builder.Services.AddDbContext<AirlineDbContext>((services, o) =>
     o.UseMongoDB(db.Client, db.DatabaseNamespace.DatabaseName);
 });
 
+builder.Services.AddGrpc(options =>
+{
+    options.EnableDetailedErrors = builder.Environment.IsDevelopment();
+});
+
+
 builder.Services.AddGrpcClient<TicketGeneratorGrpcService.TicketGeneratorGrpcServiceClient>(o =>
 {
-    var addr = builder.Configuration["TicketGenerator:GrpcAddress"] ?? "https://localhost:5201";
+    var addr = builder.Configuration["TicketGenerator:GrpcAddress"]
+               ?? throw new InvalidOperationException("TicketGenerator:GrpcAddress is not configured");
     o.Address = new Uri(addr);
 });
 
