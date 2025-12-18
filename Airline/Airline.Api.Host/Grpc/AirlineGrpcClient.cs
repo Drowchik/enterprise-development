@@ -4,7 +4,7 @@ using Airline.Application.Contracts.Protos;
 using Airline.Application.Contracts.Tickets;
 using AutoMapper;
 using Grpc.Core;
-using System.Collections.Concurrent;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Airline.Api.Host.Grpc;
 
@@ -16,11 +16,11 @@ public class AirlineGrpcClient(
     IServiceScopeFactory scopeFactory,
     IMapper mapper,
     ILogger<AirlineGrpcClient> logger,
-    IConfiguration cfg
+    IConfiguration cfg,
+    IMemoryCache cache
 ) : BackgroundService
 {
-    private readonly ConcurrentDictionary<int, bool> _flightExists = [];
-    private readonly ConcurrentDictionary<int, bool> _passengerExists = [];
+    private static readonly TimeSpan _cacheTtl = TimeSpan.FromMinutes(10);
 
     /// <summary>
     /// Основной цикл фонового сервиса который подключается к gRPC серверу отправляет запрос генерации и обрабатывает входящие батчи
@@ -69,10 +69,10 @@ public class AirlineGrpcClient(
 
                     foreach (var dto in dtos)
                     {
-                        if (!await ExistsAsync(dto.FlightId, _flightExists, flightRepo.Get, "Flight", dto, stoppingToken))
+                        if (!await ExistsAsync(dto.FlightId, "Flight", dto, flightRepo.Get, stoppingToken))
                             continue;
 
-                        if (!await ExistsAsync(dto.PassengerId, _passengerExists, passengerRepo.Get, "Passenger", dto, stoppingToken))
+                        if (!await ExistsAsync(dto.PassengerId, "Passenger", dto, passengerRepo.Get, stoppingToken))
                             continue;
 
                         valid.Add(dto);
@@ -110,36 +110,43 @@ public class AirlineGrpcClient(
     }
 
     /// <summary>
-    /// Проверка наличия сущности по идентификатору с использованием кэша чтобы не выполнять повторные запросы
+    /// Проверка наличия сущности по идентификатору с использованием IMemoryCache чтобы не выполнять повторные запросы
     /// </summary>
     private async Task<bool> ExistsAsync<TEntity>(
         int id,
-        ConcurrentDictionary<int, bool> cache,
-        Func<int, Task<TEntity?>> readFunc,
         string entityName,
         TicketCreateUpdateDto dto,
+        Func<int, Task<TEntity?>> readFunc,
         CancellationToken ct)
         where TEntity : class
     {
-        if (cache.TryGetValue(id, out var cached))
+        var cacheKey = $"{entityName}:exists:{id}";
+
+        if (cache.TryGetValue(cacheKey, out bool cached))
             return cached;
 
         ct.ThrowIfCancellationRequested();
 
+        bool exists;
         try
         {
             var entity = await readFunc(id);
-            var ok = entity is not null;
-            cache.TryAdd(id, ok);
-            return ok;
+            exists = entity is not null;
         }
         catch (KeyNotFoundException)
         {
-            cache.TryAdd(id, false);
+            exists = false;
 
-            logger.LogWarning("Skipping ticket dto because {entity} with id {id} was not found flightId={flightId} passengerId={passengerId}", entityName, id, dto.FlightId, dto.PassengerId);
-
-            return false;
+            logger.LogWarning(
+                "Skipping ticket dto because {entity} with id {id} was not found flightId={flightId} passengerId={passengerId}",
+                entityName, id, dto.FlightId, dto.PassengerId);
         }
+
+        cache.Set(cacheKey, exists, new MemoryCacheEntryOptions
+        {
+            AbsoluteExpirationRelativeToNow = _cacheTtl
+        });
+
+        return exists;
     }
 }

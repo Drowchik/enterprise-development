@@ -86,6 +86,8 @@ builder.Services.AddGrpcClient<TicketGeneratorGrpcService.TicketGeneratorGrpcSer
     o.Address = new Uri(addr);
 });
 
+builder.Services.AddMemoryCache();
+
 builder.Services.AddHostedService<AirlineGrpcClient>();
 
 var app = builder.Build();

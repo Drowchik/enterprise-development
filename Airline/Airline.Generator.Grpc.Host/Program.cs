@@ -20,6 +20,5 @@ var app = builder.Build();
 app.MapDefaultEndpoints();
 
 app.MapGrpcService<AirlineGrpcGeneratorService>();
-app.MapGet("/", () => "Airline ticket generator gRPC host is running");
 
 app.Run();
