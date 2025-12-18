@@ -1,9 +1,11 @@
+using Airline.Api.Host;
 using Airline.Application;
 using Airline.Application.Contracts;
 using Airline.Application.Contracts.AircraftFamilies;
 using Airline.Application.Contracts.AircraftModels;
 using Airline.Application.Contracts.Flights;
 using Airline.Application.Contracts.Passengers;
+using Airline.Application.Contracts.Protos;
 using Airline.Application.Contracts.Tickets;
 using Airline.Application.Services;
 using Airline.Domain;
@@ -69,6 +71,14 @@ builder.Services.AddDbContext<AirlineDbContext>((services, o) =>
     var db = services.GetRequiredService<IMongoDatabase>();
     o.UseMongoDB(db.Client, db.DatabaseNamespace.DatabaseName);
 });
+
+builder.Services.AddGrpcClient<TicketGeneratorGrpcService.TicketGeneratorGrpcServiceClient>(o =>
+{
+    var addr = builder.Configuration["TicketGenerator:GrpcAddress"] ?? "https://localhost:5201";
+    o.Address = new Uri(addr);
+});
+
+builder.Services.AddHostedService<AirlineGrpcClient>();
 
 var app = builder.Build();
 
