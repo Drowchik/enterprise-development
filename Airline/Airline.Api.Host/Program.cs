@@ -1,4 +1,4 @@
-using Airline.Api.Host;
+using Airline.Api.Host.Grpc;
 using Airline.Application;
 using Airline.Application.Contracts;
 using Airline.Application.Contracts.AircraftFamilies;
@@ -32,6 +32,7 @@ builder.Services.AddSingleton<DataSeeder>();
 builder.Services.AddAutoMapper(config =>
 {
     config.AddProfile(new AirlineProfile());
+    config.AddProfile(new AirlineGrpcProfile());
 });
 
 builder.Services.AddTransient<IRepository<AircraftFamily, int>, AircraftFamilyRepository>();

@@ -6,7 +6,7 @@ using AutoMapper;
 using Grpc.Core;
 using System.Collections.Concurrent;
 
-namespace Airline.Api.Host;
+namespace Airline.Api.Host.Grpc;
 
 /// <summary>
 /// Фоновый gRPC клиент для получения батчей TicketCreateUpdateDto из bidirectional стрима и создания билетов в системе
